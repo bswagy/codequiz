@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+}
+#quiz-container {
+    text-align: center;
+}
+#options button {
+    margin: 5px;
+}
+#game-over {
+    text-align: center;
+}
