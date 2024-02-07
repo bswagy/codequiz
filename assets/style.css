@@ -2,6 +2,19 @@ body {
     background-color: #3498db;
     font-family: Arial, sans-serif;
 }
+button {
+padding: 10px 20px; 
+font-size: 16px;
+background-color: #fff;
+color: #3498db;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+button:hover {
+background-color: #2980b9;
+color: #fff
+}
 #quiz-container {
     text-align: center;
 }
