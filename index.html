@@ -7,20 +7,46 @@
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-   <div id="quiz-container">
-<div id="questions"></div>
-<div id="options"></div>
-<button id="start-btn">Start Quiz</button>
+    <header>
+        <h1>Code Quiz</h1>
+    </header>
+    <main>
+        <section id="start-screen">
+            <p id = "timer"></p>
+            <button id="start-btn">Start Quiz</button>
+          </section>
+        <section id="quiz-container" style="display: none;">
+            <p id="quests"></p>
+            <h3 id="question-title"></h3>
+            <div id="options">
+                <button id="option-1"></button>
+                <button id="option-2"></button>
+                <button id="option-3"></button>
+                <button id="option-4"></button>
+            </div>
+            
+        </section>
+    </main>
 </div>
 <div id="game-over" style="display: none;">
 <h2>Game Over!</h2>
-<div id= "final score"></div>
-<input type="text" id="initials" placeholder="Enter your initials"
+<div id= "final-score"></div> 
+<input type="text" id="initials" placeholder="Enter your initials">
 <button id="submit-score">Submit score</button>
+<button id="view-high-score">View High Score</button>
+<ul id="score-list"></ul>
 </div>
-    
-    <script src="./assets/main.js">
 
-    </script>
+<div id="high-score-modal" class="modal">
+<div class+"modal-content">
+<span class="close">&times;</span>
+<h2>High-Score</h2>
+<p id="high-score"></p>
+</div>
+</div>
+
+
+    
+    <script src="./assets/main.js"></script>
 </body>
 </html>
