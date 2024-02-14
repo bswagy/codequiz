@@ -23,12 +23,7 @@ const questions = [
   },
   {
     question: "Which tag is used to define an unordered list in HTML?",
-    options: [
-      "<ol>",
-      "<li>",
-      "<ul>",
-      "<dl>",
-    ],
+    options: ["<ol>", "<li>", "<ul>", "<dl>"],
     answer: "<ul>",
   },
   {
@@ -48,9 +43,8 @@ const questions = [
 let currentQuestionIndex = 0;
 let timer;
 let score = 0;
-let timeLimitInSeconds = 60; // change as needed
-let highScore = { initials:"", score: 0};
-
+let timeLimitInSeconds = 30; // change as needed
+let highScore = { initials: "", score: 0 };
 
 const questionTitle = document.getElementById("question-title");
 const startBtn = document.getElementById("start-btn");
@@ -65,8 +59,10 @@ const option3 = document.getElementById("option-3");
 const option4 = document.getElementById("option-4");
 const timerEl = document.getElementById("timer");
 const highScoreModal = document.getElementById("high-score-modal");
-const viewHighScoreBtn =  document.getElementById("view-high-score");
-const closeHighScoreBtn = document.getElementById("high-score-modal").querySelector(".close");
+const viewHighScoreBtn = document.getElementById("view-high-score");
+const closeHighScoreBtn = document
+  .getElementById("high-score-modal")
+  .querySelector(".close");
 
 function startQuiz() {
   quizContainer.style.display = "block";
@@ -76,18 +72,15 @@ function startQuiz() {
 }
 
 function startTimer() {
- timer = setInterval(() => {
-     timeLimitInSeconds--;
-     if (timeLimitInSeconds <= 0) {
-clearInterval(timer);
-timeLimitInSeconds = 0;
-gameOver();
-     }
+  timer = setInterval(() => {
+    timeLimitInSeconds--;
+    if (timeLimitInSeconds <= 0) {
+      clearInterval(timer);
+      timeLimitInSeconds = 0;
+      gameOver();
+    }
 
-
-     
-     timerEl.textContent = Math.max(0,timeLimitInSeconds);
-    
+    timerEl.textContent = Math.max(0, timeLimitInSeconds);
   }, 1000);
 }
 
@@ -100,11 +93,11 @@ function showNextQuestion() {
   option4.textContent = quest.options[3];
 }
 function checkAnswer(event) {
-  const  userAnswer = event.target.textContent
+  const userAnswer = event.target.textContent;
   if (userAnswer == questions[currentQuestionIndex].answer) {
     score++;
   } else {
-    timeLimitInSeconds -=5
+    timeLimitInSeconds -= 5;
     //subtract time if answer is incorrect
     //adjust time subtraction logic as needed
   }
@@ -118,80 +111,72 @@ function checkAnswer(event) {
 
 function gameOver() {
   gameOverel.style.display = "block";
-  finalScoreEl.textContent = score;  
+  finalScoreEl.textContent = score;
 
   if (score > highScore.score) {
-    
     highScore.initials = initialsInput.value.trim();
     highScore.score = score;
-    const highScoreDisplay=`${highScore.initials}:  ${highScore.score}`;
-    document.getElementById("high-score").textContent= highScoreDisplay;
+    const highScoreDisplay = `${highScore.initials}:  ${highScore.score}`;
+    document.getElementById("high-score").textContent = highScoreDisplay;
   }
   submitScoreBtn.addEventListener("click", saveScore);
 }
 
-let highScores = []
+let highScores = [];
 
 function saveScore() {
- const initials = initialsInput.value.trim();
-//save initials and score
-const scoreItem = document.createElement("li");
-scoreItem.textContent = `${initials}: ${score}`;
-document.getElementById("score-list").appendChild(scoreItem);
-console.log("Initials:", initials);
-console.log("Score:", score);
-console.log("High Score:", highScore);
+  const initials = initialsInput.value.trim();
+  //save initials and score
+  const scoreItem = document.createElement("li");
+  scoreItem.textContent = `${initials}: ${score}`;
+  document.getElementById("score-list").appendChild(scoreItem);
+  console.log("Initials:", initials);
+  console.log("Score:", score);
+  console.log("High Score:", highScore);
 
-//push the initials and score to the highScores array
-highScores.push({ initials: initials, score: score});
+  //push the initials and score to the highScores array
+  highScores.push({ initials: initials, score: score });
 
-//update highscore display
-updateHighScoreDisplay();
-
+  //update highscore display
+  updateHighScoreDisplay();
 }
 function updateHighScoreDisplay() {
-// clear existing high score display
-const highScoreList = document.getElementById("high-score");
-highScoreList.innerHTML ="";
+  // clear existing high score display
+  const highScoreList = document.getElementById("high-score");
+  highScoreList.innerHTML = "";
 
-//Create list item for each high score entry
-highScores.forEach(entry => {
-const scoreItem = document.createElement("li");
-scoreItem.textContent = `${entry.initials}: ${entry.score}`;
-highScoreList.appendChild(scoreItem);
-
-
-});
-
-
+  //Create list item for each high score entry
+  highScores.forEach((entry) => {
+    const scoreItem = document.createElement("li");
+    scoreItem.textContent = `${entry.initials}: ${entry.score}`;
+    highScoreList.appendChild(scoreItem);
+  });
 }
 
 // update high score display on page load
 updateHighScoreDisplay();
 
-
-viewHighScoreBtn.onclick = function() {
+viewHighScoreBtn.onclick = function () {
   const highScoreDisplay = `${initialsInput.value}: ${score}`;
-document.getElementById("high-score").textContent = highScoreDisplay;
-highScoreModal.style.display = "block";
+  document.getElementById("high-score").textContent = highScoreDisplay;
+  highScoreModal.style.display = "block";
+};
 
-}
-
-closeHighScoreBtn.onclick = function() {
+closeHighScoreBtn.onclick = function () {
   highScoreModal.style.display = "none";
-}
+};
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == highScoreModal) {
     highScoreModal.style.display = "none";
   }
-}
+};
 //submitScoreBtn.addEventListener("click", () => {
 //Save initials and score
 //});
 
 startBtn.addEventListener("click", startQuiz);
-option1.addEventListener("click", checkAnswer)
-option2.addEventListener("click", checkAnswer)
-option3.addEventListener("click", checkAnswer)
-option4.addEventListener("click", checkAnswer)
+option1.addEventListener("click", checkAnswer);
+option2.addEventListener("click", checkAnswer);
+option3.addEventListener("click", checkAnswer);
+option4.addEventListener("click", checkAnswer);
